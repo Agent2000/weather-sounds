@@ -1,23 +1,25 @@
-import { TextSound, Sounds } from "./data";
+import { TextSound, Sounds, PathBg, PathIcons } from "./data";
 import "./index.scss";
 
-const root = document.getElementById("main");
+const body = document.body;
 const h2 = document.createElement("h2");
-const rain = document.getElementById("audio-rain");
-const summer = document.getElementById("audio-summer");
-const winter = document.getElementById("audio-winter");
-const playBtnRain = document.getElementById("play-rain");
-const playBtnWinter = document.getElementById("play-winter");
-const playBtnSummer = document.getElementById("play-summer");
+const rain = document.getElementById("audiRain");
+const summer = document.getElementById("audiSummer");
+const winter = document.getElementById("audiWinter");
+const playBtnRain = document.getElementById("btnRain");
+const playBtnWinter = document.getElementById("btnWinter");
+const playBtnSummer = document.getElementById("btnSummer");
 const volume = document.getElementById("volume");
+
+const imgSummer = document.getElementById("imgSummer");
+const imgRain = document.getElementById("imgRain");
+const imgWinter = document.getElementById("imgWinter");
+
+// playBtnRain.style.backgroundImage =
 
 let currenSound = {};
 
-playBtnRain.textContent = TextSound.rain;
-playBtnWinter.textContent = TextSound.winter;
-playBtnSummer.textContent = TextSound.summer;
-
-const onItemClick = function (item, sound) {
+const onItemClick = function (item, sound, image) {
   // остановить текущий звук
   if (currenSound.id && currenSound.id !== sound) {
     currenSound.sound.pause();
@@ -30,21 +32,24 @@ const onItemClick = function (item, sound) {
 
   if (item.paused) {
     item.play();
+    body.style.backgroundImage = `url(${PathBg[sound]})`;
+    image.src = PathIcons[sound];
   } else {
     item.pause();
+    image.src = "./assets/icons/pause.svg";
   }
 };
 
-playBtnRain.addEventListener("click", function () {
-  onItemClick(rain, Sounds.RAIN);
+playBtnSummer.addEventListener("click", function () {
+  onItemClick(summer, Sounds.SUMMER, imgSummer);
 });
 
-playBtnSummer.addEventListener("click", function () {
-  onItemClick(summer, Sounds.SUMMER);
+playBtnRain.addEventListener("click", function () {
+  onItemClick(rain, Sounds.RAIN, imgRain);
 });
 
 playBtnWinter.addEventListener("click", function () {
-  onItemClick(winter, Sounds.WINTER);
+  onItemClick(winter, Sounds.WINTER, imgWinter);
 });
 
 volume.addEventListener("input", function () {
