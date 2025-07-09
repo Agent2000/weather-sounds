@@ -11,22 +11,39 @@
 
 body {
   font-family: "Roboto", "sans-serif";
-  max-width: 960px;
   margin: 1 rem auto;
+  background-image: url("/assets/summer-bg.jpg");
 }
 
 h1 {
   text-align: center;
   margin-bottom: 1rem;
+  color: #ed7138;
 }
 
-ul {
-  list-style: none;
+.audio-btn-group {
+  text-align: center;
+}
 
-  li {
-    padding: 1rem 2rem;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-  }
+.btn {
+  width: 140px;
+  height: 140px;
+  border: solid 2px white;
+  border-radius: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.btn-rain {
+  background-image: url("/assets/rainy-bg.jpg");
+}
+.btn-summer {
+  background-image: url("/assets/summer-bg.jpg");
+}
+.btn-winter {
+  background-image: url("/assets/winter-bg.jpg");
+}
+
+.volume {
+  text-align: center;
+  padding-top: 10px;
 }
