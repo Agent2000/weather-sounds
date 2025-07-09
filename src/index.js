@@ -1,4 +1,5 @@
 import { TextSound, Sounds } from "./data";
+import "./index.scss";
 
 const root = document.getElementById("main");
 const h2 = document.createElement("h2");
