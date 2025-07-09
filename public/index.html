@@ -7,17 +7,23 @@
     <title>Weather sounds</title>
   </head>
   <body>
-    <h1>Звуки природы!</h1>
+    <h1>Weather sounds</h1>
     <div id="main">
-      <div id="audio-btn">
-        <button id="play-rain"></button>
-        <button id="play-summer"></button>
-        <button id="play-winter"></button>
+      <div id="audio-btn" class="audio-btn-group">
+        <button id="btnSummer" class="btn btn-summer">
+          <img id="imgSummer" src="assets/icons/sun.svg" alt="" />
+        </button>
+        <button id="btnRain" class="btn btn-rain">
+          <img id="imgRain" src="assets/icons/cloud-rain.svg" alt="" />
+        </button>
+        <button id="btnWinter" class="btn btn-winter">
+          <img id="imgWinter" src="assets/icons/cloud-snow.svg" alt="" />
+        </button>
       </div>
-      <audio id="audio-rain" src="./assets/sounds/rain.mp3"></audio>
-      <audio id="audio-winter" src="./assets/sounds/winter.mp3"></audio>
-      <audio id="audio-summer" src="./assets/sounds/summer.mp3"></audio>
-      <div>
+      <audio id="audiRain" src="./assets/sounds/rain.mp3"></audio>
+      <audio id="audiWinter" src="./assets/sounds/winter.mp3"></audio>
+      <audio id="audiSummer" src="./assets/sounds/summer.mp3"></audio>
+      <div class="volume">
         <input
           id="volume"
           type="range"
