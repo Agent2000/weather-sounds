@@ -21,7 +21,7 @@ module.exports = {
           to: path.resolve(__dirname, "dist"),
         },
         {
-          from: path.resolve(__dirname, "./assets/sounds/rain.mp3"),
+          from: path.resolve(__dirname, "./assets/sounds"),
           to: path.resolve(__dirname, "dist"),
         },
       ],
