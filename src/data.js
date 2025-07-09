@@ -10,7 +10,21 @@ const Sounds = {
   SUMMER: "summer",
 };
 
+const PathBg = {
+  rain: "assets/rainy-bg.jpg",
+  winter: "assets/winter-bg.jpg",
+  summer: "assets/summer-bg.jpg",
+};
+
+const PathIcons = {
+  rain: "assets/icons/cloud-rain.svg",
+  winter: "assets/icons/cloud-snow.svg",
+  summer: "assets/icons/sun.svg",
+};
+
 module.exports = {
   TextSound,
   Sounds,
+  PathBg,
+  PathIcons,
 };
