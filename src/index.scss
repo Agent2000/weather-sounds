@@ -3,16 +3,26 @@
   src: url("./fonts/Roboto-Regular.ttf") format("truetype");
 }
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+// * {
+//   padding: 0;
+//   margin: 0;
+//   box-sizing: border-box;
+// }
 
 body {
   font-family: "Roboto", "sans-serif";
   margin: 1 rem auto;
   background-image: url("/assets/summer-bg.jpg");
+}
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(250, 250, 250, 0.3);
+  z-index: -1;
 }
 
 h1 {
@@ -26,12 +36,13 @@ h1 {
 }
 
 .btn {
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
   border: solid 2px white;
   border-radius: 20px;
   background-size: cover;
   background-repeat: no-repeat;
+  margin: 0px 8px;
 }
 .btn-rain {
   background-image: url("/assets/rainy-bg.jpg");
