@@ -1,8 +1,6 @@
 import { TextSound, Sounds, PathBg, PathIcons } from "./data";
 import "./index.scss";
 
-const body = document.body;
-const h2 = document.createElement("h2");
 const rain = document.getElementById("audiRain");
 const summer = document.getElementById("audiSummer");
 const winter = document.getElementById("audiWinter");
@@ -15,8 +13,6 @@ const imgSummer = document.getElementById("imgSummer");
 const imgRain = document.getElementById("imgRain");
 const imgWinter = document.getElementById("imgWinter");
 
-// playBtnRain.style.backgroundImage =
-
 let currenSound = {};
 
 const changeBodyAfterBg = function (imageUrl) {
@@ -27,7 +23,6 @@ const changeBodyAfterBg = function (imageUrl) {
 };
 
 const onItemClick = function (item, sound, image) {
-  // остановить текущий звук
   if (currenSound.id && currenSound.id !== sound) {
     currenSound.sound.pause();
   }
