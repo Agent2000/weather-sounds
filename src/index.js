@@ -19,6 +19,13 @@ const imgWinter = document.getElementById("imgWinter");
 
 let currenSound = {};
 
+const changeBodyAfterBg = function (imageUrl) {
+  document.documentElement.style.setProperty(
+    "--body-after-bg",
+    `url('${imageUrl}')`
+  );
+};
+
 const onItemClick = function (item, sound, image) {
   // остановить текущий звук
   if (currenSound.id && currenSound.id !== sound) {
@@ -32,7 +39,7 @@ const onItemClick = function (item, sound, image) {
 
   if (item.paused) {
     item.play();
-    body.style.backgroundImage = `url(${PathBg[sound]})`;
+    changeBodyAfterBg(PathBg[sound]);
     image.src = PathIcons[sound];
   } else {
     item.pause();
