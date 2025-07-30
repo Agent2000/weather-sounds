@@ -1,17 +1,18 @@
-import { TextSound, Sounds, PathBg, PathIcons } from "./data";
+import { TextSound, Sounds, PathBg, PathIcons, BtnIds } from "./data";
 import "./index.scss";
 
 const rain = document.getElementById("audiRain");
 const summer = document.getElementById("audiSummer");
 const winter = document.getElementById("audiWinter");
-const playBtnRain = document.getElementById("btnRain");
-const playBtnWinter = document.getElementById("btnWinter");
-const playBtnSummer = document.getElementById("btnSummer");
+
 const volume = document.getElementById("volume");
+const btnlist = document.querySelector(".audio-btn-group");
 
 const imgSummer = document.getElementById("imgSummer");
 const imgRain = document.getElementById("imgRain");
 const imgWinter = document.getElementById("imgWinter");
+
+const list = document.querySelector(".audio-btn-group");
 
 let currenSound = {};
 
@@ -42,16 +43,14 @@ const onItemClick = function (item, sound, image) {
   }
 };
 
-playBtnSummer.addEventListener("click", function () {
-  onItemClick(summer, Sounds.SUMMER, imgSummer);
-});
+btnlist.addEventListener("click", ({ target }) => {
+  const targetId = target.closest("[id]").id;
 
-playBtnRain.addEventListener("click", function () {
-  onItemClick(rain, Sounds.RAIN, imgRain);
-});
+  if (!targetId) return;
 
-playBtnWinter.addEventListener("click", function () {
-  onItemClick(winter, Sounds.WINTER, imgWinter);
+  if (targetId === BtnIds.summer) onItemClick(summer, Sounds.SUMMER, imgSummer);
+  if (targetId === BtnIds.rain) onItemClick(rain, Sounds.RAIN, imgRain);
+  if (targetId === BtnIds.winter) onItemClick(winter, Sounds.WINTER, imgWinter);
 });
 
 volume.addEventListener("input", function () {
