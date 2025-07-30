@@ -22,9 +22,16 @@ const PathIcons = {
   summer: "assets/icons/sun.svg",
 };
 
+const BtnIds = {
+  rain: "btnRain",
+  winter: "btnWinter",
+  summer: "btnSummer",
+};
+
 module.exports = {
   TextSound,
   Sounds,
   PathBg,
   PathIcons,
+  BtnIds,
 };
