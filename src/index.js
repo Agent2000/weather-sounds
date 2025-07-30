@@ -12,8 +12,6 @@ const imgSummer = document.getElementById("imgSummer");
 const imgRain = document.getElementById("imgRain");
 const imgWinter = document.getElementById("imgWinter");
 
-const list = document.querySelector(".audio-btn-group");
-
 let currenSound = {};
 
 const changeBodyAfterBg = function (imageUrl) {
