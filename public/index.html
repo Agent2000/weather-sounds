@@ -8,31 +8,8 @@
   </head>
   <body>
     <h1>Weather sounds</h1>
-    <div id="main">
-      <div id="audio-btn" class="audio-btn-group">
-        <button id="btnSummer" class="btn btn-summer">
-          <img id="imgSummer" src="assets/icons/sun.svg" alt="" />
-        </button>
-        <button id="btnRain" class="btn btn-rain">
-          <img id="imgRain" src="assets/icons/cloud-rain.svg" alt="" />
-        </button>
-        <button id="btnWinter" class="btn btn-winter">
-          <img id="imgWinter" src="assets/icons/cloud-snow.svg" alt="" />
-        </button>
-      </div>
-      <audio id="audiRain" src="./assets/sounds/rain.mp3"></audio>
-      <audio id="audiWinter" src="./assets/sounds/winter.mp3"></audio>
-      <audio id="audiSummer" src="./assets/sounds/summer.mp3"></audio>
-      <div class="volume">
-        <input
-          id="volume"
-          type="range"
-          min="0"
-          max="1"
-          step="0.1"
-          value="0.5"
-        />
-      </div>
+    <div class="weather-list"></div>
+    <input class="volume-controller" type="range">
     </div>
-  </body>
+   </body>
 </html>
