@@ -1,69 +1,64 @@
-import { TextSound, Sounds, PathBg, PathIcons, BtnIds } from "./data";
+import data from "./data";
 import "./index.scss";
 
-const rain = document.getElementById("audiRain") as HTMLAudioElement;
-const summer = document.getElementById("audiSummer") as HTMLAudioElement;
-const winter = document.getElementById("audiWinter") as HTMLAudioElement;
+let plaingMusicId: string | undefined;
+const list = document.querySelector(".weather-list") as HTMLElement;
+const volume = document.querySelector(".volume-controller") as HTMLInputElement;
+const audioElement = new Audio();
 
-const volume = document.getElementById("volume") as HTMLInputElement;
-const btnlist = document.querySelector(".audio-btn-group") as HTMLDivElement;
+audioElement.loop = true;
 
-const imgSummer = document.getElementById("imgSummer") as HTMLImageElement;
-const imgRain = document.getElementById("imgRain") as HTMLImageElement;
-const imgWinter = document.getElementById("imgWinter") as HTMLImageElement;
-
-let currenSound: { id: string | undefined; sound: any } = {
-  id: undefined,
-  sound: undefined,
-};
-
-const changeBodyAfterBg = function (imageUrl: any): void {
+volume.addEventListener("input", (e: Event) => {
+  audioElement.volume =
+    Number((e.currentTarget as HTMLInputElement).value) / 100;
+});
+const changeBodyAfterBg = function (imageUrl: string) {
   document.documentElement.style.setProperty(
     "--body-after-bg",
     `url('${imageUrl}')`
   );
 };
 
-const onItemClick = function (
-  item: HTMLAudioElement,
-  sound: string,
-  image: HTMLImageElement
-): void {
-  if (currenSound.id && currenSound.id !== sound) {
-    currenSound.sound.pause();
-  }
-
-  item.volume = Number(volume.value);
-
-  currenSound.id = sound;
-  currenSound.sound = item;
-
-  if (item.paused) {
-    item.play();
-    changeBodyAfterBg(PathBg[sound]);
-    image.src = PathIcons[sound];
-  } else {
-    item.pause();
-    image.src = "./assets/icons/pause.svg";
-  }
-};
-
-btnlist.addEventListener("click", ({ target }): void => {
-  if (!target) return;
-
-  const targetId: string | undefined = (target as HTMLElement)?.closest(
-    "[id]"
-  )?.id;
+list.addEventListener("click", ({ target }) => {
+  const targetId = (
+    (target as Element).closest("[data-item-id]") as HTMLElement
+  )?.dataset.itemId;
 
   if (!targetId) return;
 
-  if (targetId === BtnIds.summer) onItemClick(summer, Sounds.summer, imgSummer);
-  if (targetId === BtnIds.rain) onItemClick(rain, Sounds.rain, imgRain);
-  if (targetId === BtnIds.winter) onItemClick(winter, Sounds.winter, imgWinter);
-});
+  const item = data.find((i) => i.id === targetId);
 
-volume.addEventListener("input", function () {
-  if (currenSound.id) {
-    currenSound.sound.volume = this.value;
+  if (!item) return;
+
+  if (plaingMusicId !== item.id) {
+    plaingMusicId = item.id;
+    audioElement.src = item.sound;
+    audioElement.play();
+    changeBodyAfterBg(item.bg);
+    return;
+  }
+
+  if (audioElement.paused) {
+    audioElement.play();
+  } else {
+    audioElement.pause();
   }
 });
+const renderItem = function (item: any) {
+  const elemItem = document.createElement("div");
+  const btnItem = document.createElement("button");
+  const iconItem = document.createElement("img");
+
+  btnItem.classList.add("weather-item");
+  iconItem.classList.add("weather-item-icon");
+
+  btnItem.dataset.itemId = item.id;
+  btnItem.style.backgroundImage = `url("${item.bg}")`;
+  iconItem.src = item.icon;
+
+  btnItem.append(iconItem);
+  elemItem.append(btnItem);
+  list.append(elemItem);
+};
+
+data.forEach(renderItem);
