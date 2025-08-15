@@ -1,60 +1,54 @@
-import { TextSound, Sounds, PathBg, PathIcons, BtnIds } from "./data";
-import "./index.scss";
-
-const rain = document.getElementById("audiRain");
-const summer = document.getElementById("audiSummer");
-const winter = document.getElementById("audiWinter");
-
-const volume = document.getElementById("volume");
-const btnlist = document.querySelector(".audio-btn-group");
-
-const imgSummer = document.getElementById("imgSummer");
-const imgRain = document.getElementById("imgRain");
-const imgWinter = document.getElementById("imgWinter");
-
-const list = document.querySelector(".audio-btn-group");
-
-let currenSound = {};
-
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const data_1 = __importDefault(require("./data"));
+require("./index.scss");
+let plaingMusicId;
+const list = document.querySelector(".weather-list");
+const volume = document.querySelector(".volume-controller");
+const audioElement = new Audio();
+audioElement.loop = true;
+volume.addEventListener("input", (e) => {
+    audioElement.volume =
+        Number(e.currentTarget.value) / 100;
+});
 const changeBodyAfterBg = function (imageUrl) {
-  document.documentElement.style.setProperty(
-    "--body-after-bg",
-    `url('${imageUrl}')`
-  );
+    document.documentElement.style.setProperty("--body-after-bg", `url('${imageUrl}')`);
 };
-
-const onItemClick = function (item, sound, image) {
-  if (currenSound.id && currenSound.id !== sound) {
-    currenSound.sound.pause();
-  }
-
-  item.volume = volume.value;
-
-  currenSound.id = sound;
-  currenSound.sound = item;
-
-  if (item.paused) {
-    item.play();
-    changeBodyAfterBg(PathBg[sound]);
-    image.src = PathIcons[sound];
-  } else {
-    item.pause();
-    image.src = "./assets/icons/pause.svg";
-  }
+list.addEventListener("click", ({ target }) => {
+    const targetId = target.closest("[data-item-id]")?.dataset.itemId;
+    if (!targetId)
+        return;
+    const item = data_1.default.find((i) => i.id === targetId);
+    if (!item)
+        return;
+    if (plaingMusicId !== item.id) {
+        plaingMusicId = item.id;
+        audioElement.src = item.sound;
+        audioElement.play();
+        changeBodyAfterBg(item.bg);
+        return;
+    }
+    if (audioElement.paused) {
+        audioElement.play();
+    }
+    else {
+        audioElement.pause();
+    }
+});
+const renderItem = function (item) {
+    const elemItem = document.createElement("div");
+    const btnItem = document.createElement("button");
+    const iconItem = document.createElement("img");
+    btnItem.classList.add("weather-item");
+    iconItem.classList.add("weather-item-icon");
+    btnItem.dataset.itemId = item.id;
+    btnItem.style.backgroundImage = `url("${item.bg}")`;
+    iconItem.src = item.icon;
+    btnItem.append(iconItem);
+    elemItem.append(btnItem);
+    list.append(elemItem);
 };
-
-btnlist.addEventListener("click", ({ target }) => {
-  const targetId = target.closest("[id]").id;
-
-  if (!targetId) return;
-
-  if (targetId === BtnIds.summer) onItemClick(summer, Sounds.SUMMER, imgSummer);
-  if (targetId === BtnIds.rain) onItemClick(rain, Sounds.RAIN, imgRain);
-  if (targetId === BtnIds.winter) onItemClick(winter, Sounds.WINTER, imgWinter);
-});
-
-volume.addEventListener("input", function () {
-  if (currenSound.id) {
-    currenSound.sound.volume = this.value;
-  }
-});
+data_1.default.forEach(renderItem);
