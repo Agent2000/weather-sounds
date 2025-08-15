@@ -52,8 +52,22 @@ module.exports = {
         ],
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        test: /\.(jpe?g|png|webp|gif)$/i,
         type: "asset/resource",
+      },
+      {
+        test: /\.svg$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "assets/icons/[name][ext]",
+        },
+      },
+      {
+        test: /\.mp3$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "assets/sounds/[name][ext]",
+        },
       },
     ],
   },
