@@ -6,7 +6,6 @@
 body {
   font-family: "Roboto", "sans-serif";
   margin: 1 rem auto;
-  // background-image: url("/assets/summer-bg.jpg");
 }
 body::after {
   content: "";
@@ -24,32 +23,30 @@ h1 {
   text-align: center;
   margin-bottom: 1rem;
   color: #ed7138;
+  font-size: 56px;
 }
 
-.audio-btn-group {
-  text-align: center;
+.weather-list {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  margin-bottom: 20px;
 }
 
-.btn {
-  width: 150px;
-  height: 150px;
-  border: solid 2px white;
-  border-radius: 20px;
+.weather-item {
+  border: 1px solid #ccc;
+  padding: 4rem 4rem;
+  border-radius: 24px;
+  cursor: pointer;
   background-size: cover;
-  background-repeat: no-repeat;
-  margin: 0px 8px;
-}
-.btn-rain {
-  background-image: url("/assets/rainy-bg.jpg");
-}
-.btn-summer {
-  background-image: url("/assets/summer-bg.jpg");
-}
-.btn-winter {
-  background-image: url("/assets/winter-bg.jpg");
 }
 
-.volume {
-  text-align: center;
-  padding-top: 10px;
+.weather-item-icon {
+  width: 50px;
+}
+
+.volume-controller {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
